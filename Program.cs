@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text.RegularExpressions;
 
 Console.WriteLine("Vítejte v programu pro tvorbu haiku.");
