@@ -4,47 +4,38 @@ using System.Text.RegularExpressions;
 Console.WriteLine("Vítejte v programu pro tvorbu haiku.");
 Console.WriteLine();
 
-while (true)
+const int pocetSlabik1 = 5, pocetSlabik2 = 7, pocetSlabik3 = 5;
+
+// Řádek 1
+Console.Write("Zadejte první řádek (5 slabik): ");
+var radek1 = PrectiSlovoSDanymPoctemSlabik(pocetSlabik1);
+
+// Řádek 2
+Console.Write("Zadejte druhý řádek (7 slabik): ");
+var radek2 = PrectiSlovoSDanymPoctemSlabik(pocetSlabik2);
+
+// Řádek 3
+Console.Write("Zadejte třetí řádek (5 slabik): ");
+var radek3 = PrectiSlovoSDanymPoctemSlabik(pocetSlabik3);
+
+Console.WriteLine("Tvoje haiku:");
+Console.WriteLine($"{radek1}");
+Console.WriteLine($"{radek2}");
+Console.WriteLine($"{radek3}");
+
+
+//Čte ze stdin dokud nemá vstup správný počet slabik
+static string PrectiSlovoSDanymPoctemSlabik(int pozadovanyPocetSlabik)
 {
-    string? radek1 = null, radek2 = null, radek3 = null;
-    int pocetSlabik1 = 0, pocetSlabik2 = 0, pocetSlabik3 = 0;
-    bool dlouhyRadek = false;
-    // Řádek 1
-    while (pocetSlabik1 != 5)
+    while (true)
     {
-        Console.Write("Zadejte první řádek (5 slabik): ");
-        radek1 = Console.ReadLine()?.Trim().ToLower();
-        pocetSlabik1 = PocetSlabik(radek1);
-        Informuj(pocetSlabik1, dlouhyRadek);
-    }
-
-    // Řádek 2
-    while (pocetSlabik2 != 7)
-    {
-        dlouhyRadek = true;
-        Console.Write("Zadejte druhý řádek (7 slabik): ");
-        radek2 = Console.ReadLine()?.Trim().ToLower();
-        pocetSlabik2 = PocetSlabik(radek2);
-        Informuj(pocetSlabik2, dlouhyRadek);
-    }
-    dlouhyRadek = false;
-    // Řádek 3
-    while (pocetSlabik3 != 5)
-    {
-        Console.Write("Zadejte třetí řádek (5 slabik): ");
-        radek3 = Console.ReadLine()?.Trim().ToLower();
-        pocetSlabik3 = PocetSlabik(radek3);
-        Informuj(pocetSlabik3, dlouhyRadek);
-    }
-
-    // Pokud jsou všechny řádky správné, vypíšeme je a ukončíme smyčku
-    if (pocetSlabik1 == 5 && pocetSlabik2 == 7 && pocetSlabik3 == 5)
-    {
-        Console.WriteLine("Tvoje haiku:");
-        Console.WriteLine($"{radek1}");
-        Console.WriteLine($"{radek2}");
-        Console.WriteLine($"{radek3}");
-        break;
+        var input = Console.ReadLine()?.ToLower().Trim();
+        if (input is null) continue;
+        
+        var pocetSlabik = PocetSlabik(input);
+        Informuj(pocetSlabik, pozadovanyPocetSlabik);
+        
+        if (pocetSlabik == pozadovanyPocetSlabik) return input;
     }
 }
 
@@ -73,60 +64,33 @@ static int PocetSlabik(string slovo)
 
     return slovo.Length;
 }
-static void Informuj(int pocetSlabik, bool radek)
+
+static void Informuj(int pocetSlabik, int pozadovanyPocetSlabik)
 {
-    if (!radek)
+    if (pocetSlabik == pozadovanyPocetSlabik)
     {
-        switch (pocetSlabik)
-        {
-            case 1:
-                Console.WriteLine("Slova v řádku mají pouze jednu slabiku.");
-                break;
-            case 2:
-                Console.WriteLine("Slova v řádku mají pouze dvě slabiky.");
-                break;
-            case 3:
-                Console.WriteLine("Slova v řádku mají pouze tři slabiky.");
-                break;
-            case 4:
-                Console.WriteLine("Slova v řádku mají pouze čtyři slabiky.");
-                break;
-            case 5:
-                Console.WriteLine("Slova v řádku mají správný počet slabik.");
-                break;
-            default:
-                Console.WriteLine("Slova v řádku mají příliš mnoho ({0}) slabik.", pocetSlabik);
-                break;
-        }
+        Console.WriteLine("Slova v řádku mají správný počet slabik");
+        return;
     }
-    else
+
+    if (pocetSlabik > pozadovanyPocetSlabik)
     {
-        switch (pocetSlabik)
-        {
-            case 1:
-                Console.WriteLine("Slova v řádku mají pouze jednu slabiku.");
-                break;
-            case 2:
-                Console.WriteLine("Slova v řádku mají pouze dvě slabiky.");
-                break;
-            case 3:
-                Console.WriteLine("Slova v řádku mají pouze tři slabiky.");
-                break;
-            case 4:
-                Console.WriteLine("Slova v řádku mají pouze čtyři slabiky.");
-                break;
-            case 5:
-                Console.WriteLine("Slova v řádku mají pouze pět slabik.");
-                break;
-            case 6:
-                Console.WriteLine("Slova v řádku mají pouze šest slabik.");
-                break;
-            case 7:
-                Console.WriteLine("Slova v řádku mají správný počet slabik.");
-                break;
-            default:
-                Console.WriteLine("Slova v řádku mají příliš mnoho ({0}) slabik.", pocetSlabik);
-                break;
-        }
+        Console.WriteLine($"Slova v řádku mají o {pocetSlabik - pozadovanyPocetSlabik} slabik{SlabikaKoncovka(pocetSlabik - pozadovanyPocetSlabik)} více.");
+        return;
     }
+
+    if (pocetSlabik < pozadovanyPocetSlabik)
+    {
+        Console.WriteLine($"Slova v řádku mají o ${pozadovanyPocetSlabik - pocetSlabik} slabik{SlabikaKoncovka(pozadovanyPocetSlabik - pocetSlabik)} méně.");
+    }
+}
+
+static string SlabikaKoncovka(int cnt)
+{
+    return cnt switch
+    {
+        1 => "u",
+        < 5 => "y",
+        _ => ""
+    };
 }
