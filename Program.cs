@@ -75,13 +75,15 @@ static void Informuj(int pocetSlabik, int pozadovanyPocetSlabik)
 
     if (pocetSlabik > pozadovanyPocetSlabik)
     {
-        Console.WriteLine($"Slova v řádku mají o {pocetSlabik - pozadovanyPocetSlabik} slabik{SlabikaKoncovka(pocetSlabik - pozadovanyPocetSlabik)} více.");
+        var rozdilSlabik = pocetSlabik - pozadovanyPocetSlabik;
+        Console.WriteLine($"Slova v řádku mají o {rozdilSlabik} slabik{SlabikaKoncovka(rozdilSlabik)} více.");
         return;
     }
 
     if (pocetSlabik < pozadovanyPocetSlabik)
     {
-        Console.WriteLine($"Slova v řádku mají o ${pozadovanyPocetSlabik - pocetSlabik} slabik{SlabikaKoncovka(pozadovanyPocetSlabik - pocetSlabik)} méně.");
+        var rozdilSlabik = pozadovanyPocetSlabik - pocetSlabik;
+        Console.WriteLine($"Slova v řádku mají o {rozdilSlabik} slabik{SlabikaKoncovka(rozdilSlabik)} méně.");
     }
 }
 
