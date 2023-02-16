@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text.RegularExpressions;
 
 Console.WriteLine("Vítejte v programu pro tvorbu haiku.");
@@ -8,32 +8,33 @@ while (true)
 {
     string? radek1 = null, radek2 = null, radek3 = null;
     int pocetSlabik1 = 0, pocetSlabik2 = 0, pocetSlabik3 = 0;
-
+    bool dlouhyRadek = false;
     // Řádek 1
     while (pocetSlabik1 != 5)
     {
         Console.Write("Zadejte první řádek (5 slabik): ");
         radek1 = Console.ReadLine()?.Trim().ToLower();
         pocetSlabik1 = PocetSlabik(radek1);
-        Informuj(pocetSlabik1);
+        Informuj(pocetSlabik1, dlouhyRadek);
     }
 
     // Řádek 2
     while (pocetSlabik2 != 7)
     {
+        dlouhyRadek = true;
         Console.Write("Zadejte druhý řádek (7 slabik): ");
         radek2 = Console.ReadLine()?.Trim().ToLower();
         pocetSlabik2 = PocetSlabik(radek2);
-        Informuj(pocetSlabik2);
+        Informuj(pocetSlabik2, dlouhyRadek);
     }
-
+    dlouhyRadek = false;
     // Řádek 3
     while (pocetSlabik3 != 5)
     {
         Console.Write("Zadejte třetí řádek (5 slabik): ");
         radek3 = Console.ReadLine()?.Trim().ToLower();
         pocetSlabik3 = PocetSlabik(radek3);
-        Informuj(pocetSlabik3);
+        Informuj(pocetSlabik3, dlouhyRadek);
     }
 
     // Pokud jsou všechny řádky správné, vypíšeme je a ukončíme smyčku
@@ -72,27 +73,60 @@ static int PocetSlabik(string slovo)
 
     return slovo.Length;
 }
-static void Informuj(int pocetSlabik)
+static void Informuj(int pocetSlabik, bool radek)
 {
-    switch (pocetSlabik)
+    if (!radek)
     {
-        case 1:
-            Console.WriteLine("Slova v řádku mají pouze jednu slabiku.");
-            break;
-        case 2:
-            Console.WriteLine("Slova v řádku mají pouze dvě slabiky.");
-            break;
-        case 3:
-            Console.WriteLine("Slova v řádku mají pouze tři slabiky.");
-            break;
-        case 4:
-            Console.WriteLine("Slova v řádku mají pouze čtyři slabiky.");
-            break;
-        case 5:
-            Console.WriteLine("Slova v řádku mají správný počet slabik.");
-            break;
-        default:
-            Console.WriteLine("Slova v řádku mají příliš mnoho ({0}) slabik.", pocetSlabik);
-            break;
+        switch (pocetSlabik)
+        {
+            case 1:
+                Console.WriteLine("Slova v řádku mají pouze jednu slabiku.");
+                break;
+            case 2:
+                Console.WriteLine("Slova v řádku mají pouze dvě slabiky.");
+                break;
+            case 3:
+                Console.WriteLine("Slova v řádku mají pouze tři slabiky.");
+                break;
+            case 4:
+                Console.WriteLine("Slova v řádku mají pouze čtyři slabiky.");
+                break;
+            case 5:
+                Console.WriteLine("Slova v řádku mají správný počet slabik.");
+                break;
+            default:
+                Console.WriteLine("Slova v řádku mají příliš mnoho ({0}) slabik.", pocetSlabik);
+                break;
+        }
+    }
+    else
+    {
+        switch (pocetSlabik)
+        {
+            case 1:
+                Console.WriteLine("Slova v řádku mají pouze jednu slabiku.");
+                break;
+            case 2:
+                Console.WriteLine("Slova v řádku mají pouze dvě slabiky.");
+                break;
+            case 3:
+                Console.WriteLine("Slova v řádku mají pouze tři slabiky.");
+                break;
+            case 4:
+                Console.WriteLine("Slova v řádku mají pouze čtyři slabiky.");
+                break;
+            case 5:
+                Console.WriteLine("Slova v řádku mají pouze pět slabik.");
+                break;
+            case 6:
+                Console.WriteLine("Slova v řádku mají pouze šest slabik.");
+                break;
+            case 7:
+                Console.WriteLine("Slova v řádku mají správný počet slabik.");
+                break;
+            default:
+                Console.WriteLine("Slova v řádku mají příliš mnoho ({0}) slabik.", pocetSlabik);
+                break;
+        }
     }
 }
