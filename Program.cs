@@ -14,7 +14,8 @@ while (true)
     {
         Console.Write("Zadejte první řádek (5 slabik): ");
         radek1 = Console.ReadLine()?.Trim().ToLower();
-        pocetSlabik1 = PocetSlabik(radek1);
+        if (radek1 != null) 
+            pocetSlabik1 = PocetSlabik(radek1);
         Informuj(pocetSlabik1, dlouhyRadek);
     }
 
@@ -24,7 +25,8 @@ while (true)
         dlouhyRadek = true;
         Console.Write("Zadejte druhý řádek (7 slabik): ");
         radek2 = Console.ReadLine()?.Trim().ToLower();
-        pocetSlabik2 = PocetSlabik(radek2);
+        if (radek2 != null) 
+            pocetSlabik2 = PocetSlabik(radek2);
         Informuj(pocetSlabik2, dlouhyRadek);
     }
     dlouhyRadek = false;
@@ -33,7 +35,8 @@ while (true)
     {
         Console.Write("Zadejte třetí řádek (5 slabik): ");
         radek3 = Console.ReadLine()?.Trim().ToLower();
-        pocetSlabik3 = PocetSlabik(radek3);
+        if (radek3 != null)
+            pocetSlabik3 = PocetSlabik(radek3);
         Informuj(pocetSlabik3, dlouhyRadek);
     }
 
